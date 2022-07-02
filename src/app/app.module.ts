@@ -1,16 +1,52 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { UserService } from './component/user/user.service';
+import {UserComponent} from './component/user/user.component';
+import { RouterModule } from '@angular/router';
+import { NavHeaderComponent } from './component/nav-header/nav-header.component';
+import { HomeComponent } from './component/home/home.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { LeftNavComponent } from './component/left-nav/left-nav.component';
+import { HomecComponent } from './component/main content/homec/homec.component';
+import { AudioPlaybackUIComponent } from './component/audioPlaybackUI/audio-playback-ui/audio-playback-ui.component';
+import { ArtistComponent } from './component/artist/artist.component';
+import { LibraryComponent } from './component/library/library.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, UserComponent, NavHeaderComponent, HomeComponent, PageNotFoundComponent, LeftNavComponent, HomecComponent, AudioPlaybackUIComponent, ArtistComponent, LibraryComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot([
+      {
+        path: 'signUp',
+        component: UserComponent
+    
+      },
+      {
+        path:"home",
+        component: HomeComponent
+      },
+      {
+        path:"",
+        component: HomeComponent
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
+      }
+      
+    ])
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [UserService],
+  bootstrap: [AppComponent, UserComponent]
 })
 export class AppModule { }

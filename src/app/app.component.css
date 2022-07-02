@@ -1,0 +1,25 @@
+body
+{
+    margin:none;
+    background-color: black;
+}
+
+.userContainer
+{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+    background: cornsilk;
+}
+.buttonContainer
+{
+    display:flex;
+    justify-content: left;
+    width: 40%;
+}
+button{
+    width: 50px;
+    height: 30px;
+    padding: 0px 0px;
+}
