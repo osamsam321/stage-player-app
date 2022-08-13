@@ -14,12 +14,14 @@ import { HomecComponent } from './component/main content/homec/homec.component';
 import { AudioPlaybackUIComponent } from './component/audioPlaybackUI/audio-playback-ui/audio-playback-ui.component';
 import { ArtistComponent } from './component/artist/artist.component';
 import { LibraryComponent } from './component/library/library.component';
+import { LoginComponent } from './component/login/login.component';
+import { AccountComponent } from './component/account/account.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, UserComponent, NavHeaderComponent, HomeComponent, PageNotFoundComponent, LeftNavComponent, HomecComponent, AudioPlaybackUIComponent, ArtistComponent, LibraryComponent
+    AppComponent, UserComponent, NavHeaderComponent, HomeComponent, PageNotFoundComponent, LeftNavComponent, HomecComponent, AudioPlaybackUIComponent, ArtistComponent, LibraryComponent, LoginComponent, AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -32,12 +34,17 @@ import { LibraryComponent } from './component/library/library.component';
     
       },
       {
+        path: 'login',
+        component: LoginComponent
+    
+      },
+      {
         path:"home",
         component: HomeComponent
       },
       {
         path:"",
-        component: HomeComponent
+        component: LoginComponent
       },
       {
         path: '**',
