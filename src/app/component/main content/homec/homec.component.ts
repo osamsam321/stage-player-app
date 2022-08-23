@@ -10,6 +10,7 @@ export class HomecComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

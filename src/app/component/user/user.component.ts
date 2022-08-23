@@ -12,10 +12,11 @@ import { UserService } from './user.service';
 export class UserComponent implements OnInit {
   title = 'user_App';
   public users!: User[];
-
+  public currentUser:User | undefined
   constructor(private userService: UserService){}
   ngOnInit(): void {
-    this.getUsers();
+    //this.getUsers();
+    this.currentUser;
   }
   public getUsers(): void{
     this.userService.getUser().subscribe( 
@@ -38,5 +39,14 @@ export class UserComponent implements OnInit {
       }
     );
     
+  }
+  public setUser(user:User)
+  {
+    this.currentUser = user;
+  }
+
+  public getUser()
+  {
+    return this.currentUser;
   }
 }

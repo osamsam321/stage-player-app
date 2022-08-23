@@ -1,3 +1,5 @@
+import { Input } from "@angular/core";
+
 export interface User
 {
     id: number,
@@ -6,5 +8,4 @@ export interface User
     email: string,
     phoneNum: string,
     address: string
-    
 }
