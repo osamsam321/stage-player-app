@@ -23,7 +23,7 @@ import { AASDataComponent } from './component/AAS_Data/aasdata/aasdata.component
 import { AudioBoxTopTenSongsMidConfigComponent } from './component/audiobox_FWC/audio-box-top-ten-songs-mid-config/audio-box-top-ten-songs-mid-config.component';
 import { AudioboxMediumConfigType1Component } from './component/audiobox_container/audiobox-medium-config-type1/audiobox-medium-config-type1.component';
 import { AudioBoxTopEightSongsMidConfigComponent } from './component/audiobox_FWC/audio-box-top-eight-songs-mid-config/audio-box-top-eight-songs-mid-config.component';
-import { TopEightSongsComponent } from './component/AAS_DATA/top-eight-songs/top-eight-songs.component';
+import { TopEightSongsComponent } from './component/AAS_Data/top-eight-songs/top-eight-songs.component';
 
 
 

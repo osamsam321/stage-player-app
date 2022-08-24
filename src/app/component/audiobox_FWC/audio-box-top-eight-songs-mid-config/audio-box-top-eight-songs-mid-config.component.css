@@ -58,8 +58,8 @@
 }
 .home_group_type1
 {
-  width: 700px;
-  height: 390px;
+  width: 900px;
+  height: 500px;
   margin-top: 50px;
   text-align: center;
   border-top: 1px solid rgb(107, 204, 167);
@@ -76,13 +76,17 @@
 {
   height: 140px;
   width: 160px;
-  margin-top: 20px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-self: flex-start;
   flex-wrap: wrap;
   background-color: transparent;
 
+}
+.artistName
+{
+  text-decoration: underline;
 }
 .music_data img{
   height: 75%;
