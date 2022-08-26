@@ -1,5 +1,6 @@
 export interface TopEightSongs{
     artistName: string,
     albumImg: string,
-    songName: string
+    songName: string,
+    audioIdentifer: string
 }

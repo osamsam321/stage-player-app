@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TopEightSongService } from './audio-box-top-eight-songs-mid-config-Service';
+import { PlayAudio } from './PlayAudio';
+import { PlayAudioService } from './PlayAudioService';
 import { TopEightSongs } from './TopEightSongs';
 
 @Component({
@@ -10,15 +12,19 @@ import { TopEightSongs } from './TopEightSongs';
 })
 export class AudioBoxTopEightSongsMidConfigComponent implements OnInit {
 
-  constructor(private topEightSongService: TopEightSongService) { }
+  constructor(private topEightSongService: TopEightSongService, private playAudioService:PlayAudioService) { }
   public topEightSongs!: TopEightSongs[];
-  resourceFolder = 'C:\GIT\Github\stage-player-audiolibrary\target\classes\static\album_covers'
+  public playAudioValue!: PlayAudio;
+  @ViewChild('audioplay', { static: false })
+  audioPlayEF!: ElementRef;
+
+  resourceFolder = 'C:\GIT\Github\stage-player-audiolibrary\target\classes\static\album_covers';
   ngOnInit(): void {
-    this.getUsers();
+    this.getSongsInfo();
   
   }
 
-  public getUsers(): void{
+  public getSongsInfo(): void{
     this.topEightSongService.getTopEightSongs().subscribe( 
       (response: TopEightSongs[]) => {
         this.topEightSongs= response;
@@ -26,6 +32,19 @@ export class AudioBoxTopEightSongsMidConfigComponent implements OnInit {
       (error: HttpErrorResponse) => {
       }
     )
+  }
+  // public getAudio(): void{
+  //   this.playAudioService.getPlayAudio().subscribe( 
+  //     (response: PlayAudio) => {
+  //       this.playAudioValue= response;
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //     }
+  //   )
+  // }
+  public playAudio()
+  {
+    this.audioPlayEF.nativeElement.play();
   }
 
 }

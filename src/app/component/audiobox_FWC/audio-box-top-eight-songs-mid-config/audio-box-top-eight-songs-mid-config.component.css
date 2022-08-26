@@ -84,6 +84,11 @@
   background-color: transparent;
 
 }
+.music_data:hover
+{
+  background-color:rgb(202, 202, 202);
+
+}
 .artistName
 {
   text-decoration: underline;
