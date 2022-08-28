@@ -1,3 +1,9 @@
+
+<audio  #audioPlayer class="audioPlayer"  style="display:none">
+    <source src="{{mp3AudioUrl + audioId}}" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 <div class="parentCont color_gradient"> 
     <div class="sectionCont"> 
         <div class="cont color_black ">
@@ -6,11 +12,12 @@
             <div id="bandTitle"> <h5> </h5> </div>
         </div>
     </div>
-   
+    
+ 
     <div class="sectionCont">  
         <div class="imgCont"> <img class="playbackIcon" src="../../../../assets/img/forward.png"> </div>
-        <div class="imgCont "> <img class="playbackIcon" src="{{imgSrc}}" (click)="onPlayPauseClick()"> </div>
-        <div class="imgCont "> <img class="playbackIcon" src="../../../../assets/img/reverse.png">  </div>           
+        <div class="imgCont "> <img class="playbackIcon" src="{{playbackBtnStateImgSrc}}" (click)="onPlayPauseClick()"> </div>
+        <div class="imgCont "> <img class="playbackIcon" src="../../../../assets/img/reverse.png">  </div>          
     </div>
    
     <div class="sectionCont">

@@ -1,35 +1,125 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
+import { PlayAudio } from '../../audiobox_FWC/audio-box-top-eight-songs-mid-config/PlayAudio';
+import { HttpClient } from "@angular/common/http";
+import { AudioPlaybackUIService, PlaybackAudioBtnImageState } from '../audio-playback-ui-service';
 
 @Component({
   selector: 'app-audio-playback-ui',
   templateUrl: './audio-playback-ui.component.html',
   styleUrls: ['./audio-playback-ui.component.css']
 })
+@Injectable({
+  providedIn: 'root'
+})
 export class AudioPlaybackUIComponent implements OnInit {
- imgSrc:string;
- count:number;
-  constructor() {
-    this.count = 0;
-    this.imgSrc = "";
-   }
+ public playbackBtnStateImgSrc = "";
+ public playBackBtnOnPause: boolean;
+ public audioPlayBackState!: string;  
+ public audioId = "";
+ public count = 1;
+ public apService!: AudioPlaybackUIService  
+ public playbackLock: boolean | undefined;
+ public audioIsReadyToPlay: boolean | undefined;
+ public mp3AudioUrl = "http://localhost:8050/user/getAudioMP3/";
+ @ViewChild('audioPlayer', { static: true })
+  audioPlayerEF: ElementRef<HTMLAudioElement>;
+
+
+
+
+
+  constructor(private http: HttpClient, apService: AudioPlaybackUIService  ) {
+   this.audioPlayerEF = {} as ElementRef;
+   this.playBackBtnOnPause = false;
+   this.apService = apService;
+ 
+  }
   
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.audioIsReadyToPlay = true;
+   
+
+
+
+  }
+  ngAfterViewInit() {
+    this.apService.setHTML5EF(this.audioPlayerEF);
+    this.apService.currentaudioPlayBackStateImg.subscribe(image => this.playbackBtnStateImgSrc = image);
+    this.apService.currentAudioPlayBackState.subscribe(state => this.audioPlayBackState = state);
+    this.apService.currentAudioIdPlayback.subscribe(id => this.audioId = id);
+  }
+
+  // public playAudioFromAudioTagClick(audioId: string)
+  // {
+  //   this.audioId = audioId;
+  //   this.onPlayPauseClickWithCount(2);
+  // }
+  
+
+  private  setPlayCount()
+  {
+    this.audioIsReadyToPlay = true;
     this.count = 0;
-    this.imgSrc = "../../../../assets/img/play.png"; 
   }
-  onPlayPauseClick(): void{
-    this.count++;
+ 
+  private onPlayPauseClickWithplayBackState(playBackState:boolean): void{
 
-    if(this.count >= 2)
+    this.playBackBtnOnPause = (playBackState)? 
+        this.playBackBtnOnPause = false: this.playBackBtnOnPause = true;
+
+    if(!this.playBackBtnOnPause)
     {
-      this.imgSrc = "../../../../assets/img/play.png"
+      // this.imgSrc = "../../../../assets/img/pause.png";
       this.count = 0;
+
+      if(this.audioId != null && this.audioId != "")
+      {
+        this.apService.playAudio(this.audioId);
+      }
     }
-    else{
-      this.imgSrc = "../../../../assets/img/pause.png"
+    else
+    {
+      // this.imgSrc = "../../../../assets/img/play.png"
+      this.apService.pauseAudio();
     }
 
   }
+  private flipPlaybackState()
+  {
+    this.playBackBtnOnPause = (this.playBackBtnOnPause)? 
+      this.playBackBtnOnPause = false: this.playBackBtnOnPause = true;
+  }
 
+  public onPlayPauseClick(): void{
+
+    //this.flipPlaybackState();
+
+    // if(!this.playBackBtnOnPause)
+    // {
+      console.log("pause or play btn clicked");
+      this.apService.flipPlaybackState();
+
+      if(this.audioPlayBackState == PlaybackAudioBtnImageState.play.toString())
+      {
+        console.log("inside of play clicked section 1");
+
+          console.log("inside of play clicked section 2");
+
+          this.apService.playAudio(this.audioId);
+          console.log("current playback image on componponent: " + this.playbackBtnStateImgSrc);
+        // }
+      }
+ 
+    // }
+
+    else
+    {
+      this.apService.pauseAudio();
+    }
+
+  }
+ 
 }
+
+

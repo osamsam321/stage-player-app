@@ -49,16 +49,14 @@
 
         <div class="home_group_music_data_sub_section">
             
-            <div  *ngFor="let topEightSong of topEightSongs" class="music_data" (click)="playAudio()">
+            <div #music_data_box_top_8_songs *ngFor="let topEightSong of topEightSongs" (click)="playAudioFromSongClick(topEightSong.audioIdentifier)" class="music_data" >
                 
-                <audio #audioplay class="audioplay"  style="display:none">
-                    <source src="http://localhost:8050/user/{{topEightSong.audioIdentifer}}" type="audio/mpeg">
-                  Your browser does not support the audio element.
-                  </audio>
+                
                 <!-- <img src = "C:\GIT\Github\stage-player-audiolibrary\target\classes\static\album_covers\{{topEightSong.albumImg}}"> -->
                 <img src =  "http://localhost:8050/user/album_cover/{{topEightSong.albumImg}}">
                 <div class="info_section artistName"> <h4 id="text" class="artistName"> {{topEightSong.artistName}}</h4>  </div>
                 <div class="info_section"> <h4 id="text"> {{topEightSong.songName}}</h4>  </div>
+                <p #songIdEF style="display:none;" > {{topEightSong.audioIdentifier}} </p>
             </div>
 
           
