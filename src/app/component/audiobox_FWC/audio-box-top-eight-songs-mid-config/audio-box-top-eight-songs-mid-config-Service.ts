@@ -9,7 +9,7 @@ export class TopEightSongService {
        constructor (private http: HttpClient) {}
        
        // private instance variable to hold base url
-       private topEightURL = 'http://localhost:8050/user/getTopSongs/10';
+       private topEightURL = 'http://localhost:8050/user/getTopSongs/8';
 
  
 getTopEightSongs() {

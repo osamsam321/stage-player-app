@@ -38,10 +38,10 @@ export class AudioPlaybackUIService{
           console.info("inside of updateIdForPlaybackAndPlayAudio method");
             if(this.updateIdForPlayback(audioIdForPlayback))
             {
-                 this.playAudio(audioIdForPlayback);
+                 this.playAudioWithNewAudioIdUsingHTML5(audioIdForPlayback);
             }
           }
-        public playAudio(audioIdForPlayback: string)
+        public playAudioWithNewAudioIdUsingHTML5(audioIdForPlayback: string)
         {
             try {
                 console.log("starting audio playback");
@@ -57,7 +57,26 @@ export class AudioPlaybackUIService{
 
 
         }
-        public pauseAudio()
+        public playAudioUsingHTML5()
+        {
+            try {
+                if(this.audioPlayerEF.nativeElement.HAVE_CURRENT_DATA)
+                {
+                    console.log("starting audio playback");
+                     this.audioPlayerEF.nativeElement.play();
+                     this.audioPlayBackStateImg.next(new PlaybackAudioBtnImage(PlaybackAudioBtnImageState.pause).getImageUrlString());
+                     console.log("current behavior subject value for img: " + this.audioPlayBackStateImg.value);
+                     console.log(this.audioPlayBackStateImg.value);
+                     this.audioPlayBackState.next(PlaybackAudioBtnImageState.play.toString());
+                }
+       
+            } catch (error) {
+                console.log(error);
+            }
+
+
+        }
+        public pauseAudioUsingHTML5()
         {
             this.audioPlayerEF.nativeElement.pause();
             this.audioPlayBackStateImg.next(new PlaybackAudioBtnImage(PlaybackAudioBtnImageState.play).getImageUrlString());
@@ -87,6 +106,10 @@ export class AudioPlaybackUIService{
         {
             this.audioPlayBackState.next( ( this.audioPlayBackState.value == PlaybackAudioBtnImageState.play.toString() )?
                  PlaybackAudioBtnImageState.pause.toString(): PlaybackAudioBtnImageState.play.toString());
+        }
+        public modifyVolumeHtml5(finalVolumeLevel:number)
+        {
+            this.audioPlayerEF.nativeElement.volume = finalVolumeLevel;
         }
         
 }

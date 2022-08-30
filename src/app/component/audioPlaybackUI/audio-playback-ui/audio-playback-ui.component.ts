@@ -22,18 +22,19 @@ export class AudioPlaybackUIComponent implements OnInit {
  public playbackLock: boolean | undefined;
  public audioIsReadyToPlay: boolean | undefined;
  public mp3AudioUrl = "http://localhost:8050/user/getAudioMP3/";
+ public maxVolumeSets = 2000;
  @ViewChild('audioPlayer', { static: true })
   audioPlayerEF: ElementRef<HTMLAudioElement>;
+  @ViewChild('volumeRange', { static: true })
+  volumeRange: ElementRef<HTMLInputElement>;
 
 
 
-
-
-  constructor(private http: HttpClient, apService: AudioPlaybackUIService  ) {
+  constructor(private http: HttpClient, apService: AudioPlaybackUIService, volumeRange: ElementRef<HTMLInputElement>  ) {
    this.audioPlayerEF = {} as ElementRef;
    this.playBackBtnOnPause = false;
    this.apService = apService;
- 
+   this.volumeRange = volumeRange;
   }
   
    ngOnInit(): void {
@@ -75,13 +76,13 @@ export class AudioPlaybackUIComponent implements OnInit {
 
       if(this.audioId != null && this.audioId != "")
       {
-        this.apService.playAudio(this.audioId);
+        this.apService.playAudioWithNewAudioIdUsingHTML5(this.audioId);
       }
     }
     else
     {
       // this.imgSrc = "../../../../assets/img/play.png"
-      this.apService.pauseAudio();
+      this.apService.pauseAudioUsingHTML5();
     }
 
   }
@@ -106,7 +107,7 @@ export class AudioPlaybackUIComponent implements OnInit {
 
           console.log("inside of play clicked section 2");
 
-          this.apService.playAudio(this.audioId);
+          this.apService.playAudioUsingHTML5();
           console.log("current playback image on componponent: " + this.playbackBtnStateImgSrc);
         // }
       }
@@ -115,9 +116,15 @@ export class AudioPlaybackUIComponent implements OnInit {
 
     else
     {
-      this.apService.pauseAudio();
+      this.apService.pauseAudioUsingHTML5();
     }
 
+  }
+  onVolumeRangeModified(volumeRangeVal:string)
+  {
+      const maxVolumeSets = 1000;
+      const finalVolumeLevel = Number(volumeRangeVal) / maxVolumeSets;
+      this.apService.modifyVolumeHtml5(finalVolumeLevel);
   }
  
 }
