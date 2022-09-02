@@ -1,0 +1,27 @@
+#parent_wrapper
+{
+    background-color:rgb(31, 26, 26);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+#parent_content
+{
+ 
+    background-color: rgb(31, 30, 30);
+    width: 80%;
+}
+#elem_wrapper
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+h1{
+    color: rgb(214, 214, 214);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+p{
+    color: rgb(216, 215, 215);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
