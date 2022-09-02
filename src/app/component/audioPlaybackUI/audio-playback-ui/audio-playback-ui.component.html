@@ -22,7 +22,7 @@
    
     <div class="sectionCont">
         <div class="imgCont ">  <img class="playbackIcon" src="../../../../assets/img/volume-level.png"></div>
-        <input type="range" #volumeRange min="0" max="{{maxVolumeSets}}" (input)="onVolumeRangeModified(volumeRange.value)">
+        <input type="range" #volumeRange min="0" max="{{maxVolumeSets}}" value="{{maxVolumeSets}}" (input)="onVolumeRangeModified(volumeRange.value)">
     </div>
     
     
