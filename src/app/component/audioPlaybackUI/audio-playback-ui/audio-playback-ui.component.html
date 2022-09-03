@@ -1,10 +1,11 @@
 
-<audio  #audioPlayer class="audioPlayer"  style="display:none">
+<audio  #audioPlayer class="audioPlayer"  style="display:none" (click)="progressBarClick($event)" (onprogress)="updateProgessBarValue()">
     <source src="{{mp3AudioUrl + audioId}}" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
 <div class="parentCont color_gradient"> 
+    <div id="trackProgressBarContainer" class = "">  <progress #progressTrackBar class="progressAttributes" value="{{currentProgressBarValue }}" max="{{maxProgressBarValue}}">  </progress> </div> 
     <div class="sectionCont"> 
         <div class="cont color_black ">
             <div> <img> </div>

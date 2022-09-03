@@ -3,6 +3,7 @@ import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/c
 import { PlayAudio } from '../../audiobox_FWC/audio-box-top-eight-songs-mid-config/PlayAudio';
 import { HttpClient } from "@angular/common/http";
 import { AudioPlaybackUIService, PlaybackAudioBtnImageState } from '../audio-playback-ui-service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-audio-playback-ui',
@@ -16,25 +17,34 @@ export class AudioPlaybackUIComponent implements OnInit {
  public playbackBtnStateImgSrc = "";
  public playBackBtnOnPause: boolean;
  public audioPlayBackState!: string;  
+ public maxProgressBarValue = 10000;
+ public currentProgressBarValue = 0
  public audioId = "";
  public count = 1;
  public apService!: AudioPlaybackUIService  
  public playbackLock: boolean | undefined;
  public audioIsReadyToPlay: boolean | undefined;
  public mp3AudioUrl = "http://localhost:8050/user/getAudioMP3/";
- public maxVolumeSets = 2000;
+ public maxVolumeSets = 1000;
+ subscription: Subscription = new Subscription;
+
  @ViewChild('audioPlayer', { static: true })
   audioPlayerEF: ElementRef<HTMLAudioElement>;
   @ViewChild('volumeRange', { static: true })
   volumeRange: ElementRef<HTMLInputElement>;
+  @ViewChild("progressTrackBar", {static : true})
+  progressTrackBarEF: ElementRef<HTMLProgressElement>;
 
 
-
-  constructor(private http: HttpClient, apService: AudioPlaybackUIService, volumeRange: ElementRef<HTMLInputElement>  ) {
+  constructor(private http: HttpClient, apService: AudioPlaybackUIService, volumeRange: ElementRef<HTMLInputElement>, progressTrackBarEF: ElementRef<HTMLProgressElement> ) {
    this.audioPlayerEF = {} as ElementRef;
    this.playBackBtnOnPause = false;
    this.apService = apService;
    this.volumeRange = volumeRange;
+   this.progressTrackBarEF = progressTrackBarEF;
+//emit value in sequence every second
+   const source = interval(100);
+   source.subscribe(val => this.updateProgessBarValue());
   }
   
    ngOnInit(): void {
@@ -126,7 +136,17 @@ export class AudioPlaybackUIComponent implements OnInit {
       const finalVolumeLevel = Number(volumeRangeVal) / maxVolumeSets;
       this.apService.modifyVolumeHtml5(finalVolumeLevel);
   }
- 
+  updateProgessBarValue()
+  {
+    this.currentProgressBarValue = this.progressTrackBarEF.nativeElement.value = 
+        (this.audioPlayerEF.nativeElement.currentTime / this.audioPlayerEF.nativeElement.duration) * this.maxProgressBarValue;
+
+  }
+  progressBarClick(e: Event)
+  {
+    var value_clicked ;
+    alert(value_clicked);
+  }
 }
 
 

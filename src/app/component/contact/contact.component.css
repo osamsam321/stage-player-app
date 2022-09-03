@@ -17,6 +17,23 @@
     justify-content: center;
     width: 100%;
 }
+#summary
+{
+    margin: 75px 400px 0px 400px;
+}
+#form_header
+{
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 150px;
+}
+#checkbox_elem_wrapper
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
 h1{
     color: rgb(214, 214, 214);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -24,4 +41,25 @@ h1{
 p{
     color: rgb(216, 215, 215);
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+label
+{
+    color: rgb(216, 215, 215);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+#formSelection
+{
+    margin-top: 100px;
+}
+.checkbox_elem_wrapper
+{
+    width: 400px;
+    height: 50px;
+}
+#textarea_message
+{
+    margin-top: 100px;
+    margin-bottom: 50px;
+    width: 1000px;
+    height: 500px;
 }

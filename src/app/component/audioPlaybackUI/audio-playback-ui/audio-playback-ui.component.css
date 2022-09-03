@@ -2,11 +2,44 @@
 {
     display:flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     align-items: center;
     position: fixed;
     bottom: 0;
     width: 100%;
 }
+#trackProgressBarContainer
+{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 100%;
+}
+.progressAttributes
+{
+
+}
+progress {
+    border-radius: 7px; 
+    width: 1000px;
+    height: 10px;
+    margin-left: 0px;
+    box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
+  }
+  progress::-webkit-progress-bar {
+    background-color: rgb(85, 85, 83);
+    border-radius: 7px;
+  }
+  progress::-webkit-progress-value {
+    background-color: rgb(18, 28, 175);
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px 3px rgba(39, 131, 123, 0.8);
+  }
+  progress::-moz-progress-bar {
+    /* style rules */
+  }
 .imgCont
 {
 
